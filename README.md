@@ -1,1 +1,4 @@
-RAYLIB examples from https://www.raylib.com/examples.html transcoded to Racket language.
+## RAYLIB examples in RACKET 
+Examples from https://www.raylib.com/examples.html 
+Manually transcoded to Racket language
+
