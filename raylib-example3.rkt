@@ -21,7 +21,18 @@
              [x (- pos 6000.0)])
         (make-buildings (cons (make-Rectangle x y w h) lst) (+ pos w)))))
 
-(define buildings (make-buildings '() 0))
+(define (make-buildings2)
+  (for/fold ([pos 0] [res '()] #:result res)
+            ([i (in-range max-buildings)])
+    (let ([w (* 1.0 (GetRandomValue 50 200))])
+      (values
+       (+ pos w)
+       (let* ([h (* 1.0 (GetRandomValue 100 800))]
+              [y (- screen-height 130.0 h)]
+              [x (- pos 6000.0)])
+         (cons (make-Rectangle x y w h) res))))))
+
+(define buildings (make-buildings2))
 (println (Rectangle-width (first buildings)))
  
 (define (make-colors)
@@ -56,7 +67,7 @@
 
 (define (update-camera cam ply)
   (if (IsKeyDown KEY_R)
-      camera
+      (struct-copy Camera2D camera [target (Camera2D-target cam)])
       (let([old-target (Camera2D-target cam)]
            [old-rotation (Camera2D-rotation cam)]
            [old-zoom (Camera2D-zoom cam)])
